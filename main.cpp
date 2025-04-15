@@ -1,5 +1,11 @@
 #include <iostream>
+#include <cstring>
 #include <string>
+
+using namespace std;
+
+const int randomseed = 5; // random seed for start data R1.1
+const int yearnow = 2025; // will use ctime lib to replace it. get year of system data. extra part
 
 int printMenu(int &x, bool &enabled){
     std::cout << "All hail Ken Tsang.\n";
@@ -20,23 +26,72 @@ int printMenu(int &x, bool &enabled){
         x = 0;
     }else if(!(enabled) && (x == 1)){
         enabled = true;
+        // R1.1 insert loadrealstartingdata here -------------------------------------------------------------------------------
     }
     return x; // return user input
     // we should rewrite this actually.s
 }
 
 class Student{
+    public:
+    void setDefault(){
+
+    }
+    void setName(char nt[]){
+        for(int i = 0; i < 30; i++){
+            name[i] = nt[i];
+        } // use for loop to ensure that only 30 char will be entered into name
+    }
+
+    void setYear(int input){
+        cohortyear = input;
+        year = yearnow - input;
+    }
+    int getYear(){
+        return year;
+    }
+    int getCYear(){
+        return cohortyear;
+    }
+
+    void setID(){
+        // need better solution to turn int into char
+        id[0] = 'S';
+        id[1] = 48 + (getCYear() % 100 /10);
+        id[2] = 48 + (getCYear() % 10);
+        id[3] = 48 + (rand() % 10);
+        id[4] = 48 + (rand() % 10);
+        id[5] = 48 + (rand() % 10);
+        id[6] = 0;
+        for(int i = 1; i < 6; i++){
+            id[6] = id[6] + id[i] - 48;
+        }
+        id[6] = 48 + (id[6] % 10);
+       /*
+       for(int i = 0; i < strlen(id) - 1; i++){
+            cout << "[" << i << "] " << id[i] << endl;
+        }
+        cout << id << endl;
+       */     
+    }
+
     private:
-        char name[30];
-        char id[7];
+        char name[30]; // done
+        char id[7]; //done
         char major[30];
-        int year;
+        int year; // done
+        int cohortyear; // done
         float gpa;
-        char subjectcode[8][7];
-        char grade[8];
+        char subjectcode[8][7]; //replace 1D with vector 
+        char grade[8]; // replace with vector 
 };
 
 class subject{
+    public:
+    void setCredit(int input){
+        credit = input;
+    }
+
     private:
         char code[7];
         char subjectname[30];
@@ -45,6 +100,7 @@ class subject{
 };
 
 int main(void){
+    srand(randomseed);
     int response = 999; // set variable to hold user input;
     bool boo = false;
     do{
