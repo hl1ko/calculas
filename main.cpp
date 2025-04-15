@@ -23,8 +23,27 @@ int printMenu(int &x, bool &enabled){
     }
     return x; // return user input
     // we should rewrite this actually.s
-    
 }
+
+class Student{
+    private:
+        char name[30];
+        char id[7];
+        char major[30];
+        int year;
+        float gpa;
+        char subjectcode[8][7];
+        char grade[8];
+};
+
+class subject{
+    private:
+        char code[7];
+        char subjectname[30];
+        int credit;
+
+};
+
 int main(void){
     int response = 999; // set variable to hold user input;
     bool boo = false;
@@ -49,10 +68,10 @@ int main(void){
             std::cout << response << std::endl;
             break;
         case 6:
-            std::cout << response << std::endl;
+            std::cout << "Quit?";
             break;
         default:
-            std::cout << response << std::endl;
+            std::cout << "Unexpected Input.";
             break;
         }
         system("pause");
