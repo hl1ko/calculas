@@ -8,21 +8,21 @@ const int randomseed = 5; // random seed for start data R1.1 student id part
 const int yearnow = 2025; // will use ctime lib to replace it. get year of system data. extra part
 
 int printMenu(int &x, bool &enabled){
-    std::cout << "All hail Ken Tsang.\n";
-    std::cout << "*** SMS Main Menu ***\n";
-    std::cout << "[1] Load Starting Data\n";
-    std::cout << "[2] Show Student Records\n";
-    std::cout << "[3] Add/Delete Students\n";
-    std::cout << "[4] Edit Students\n";
-    std::cout << "[5] Generate Transcript\n";
-    std::cout << "[6] Credits and Exit\n";
-    std::cout << "*************\n";
-    std::cout << "Option (1 - 6): ";
+    cout << "All hail Ken Tsang.\n";
+    cout << "*** SMS Main Menu ***\n";
+    cout << "[1] Load Starting Data\n";
+    cout << "[2] Show Student Records\n";
+    cout << "[3] Add/Delete Students\n";
+    cout << "[4] Edit Students\n";
+    cout << "[5] Generate Transcript\n";
+    cout << "[6] Credits and Exit\n";
+    cout << "*************\n";
+    cout << "Option (1 - 6): ";
     cin.clear();
-    std::cin >> x; //get user input
-    if (!(enabled) && ((x >= 2) || (x <= 5)) && (x != 1)){ 
+    cin >> x; //get user input
+    if (!(enabled) && ((x >= 2) || (x <= 5)) && (x != 1)){
         // show error only when data is not loaded and user using function 2~5. R1.2
-        std::cout << "Starting data is not yet loaded. Please load starting data first!\n";
+        cout << "Starting data is not yet loaded. Please load starting data first!\n";
         x = 0;
     }else if(!(enabled) && (x == 1)){
         enabled = true;
@@ -57,7 +57,7 @@ class Student{
        for(int i = 0; i < strlen(id) - 1; i++){
             cout << "[" << i << "] " << id[i] << endl;
         }
-        cout << id << endl;   
+        cout << id << endl;
     }
     void setIDM(char input[]){
         for(int i = 0; i < 7; i++){
@@ -117,8 +117,8 @@ class Student{
         int year; // done, locked and cannot be decided by user
         int cohortyear; // done, user input
         float gpa;
-        char subjectcode[8][7]; //replace 1D with vector 
-        char grade[8][2]; // replace with vector 
+        char subjectcode[8][7]; //replace 1D with vector
+        char grade[8][2]; // replace with vector
 };
 
 class Subject{
@@ -197,7 +197,7 @@ int main(void){
         switch (response)
         {
         case 1:
-            std::cout << response << std::endl;
+            cout << response << endl;
             Student studentdata[100];
             Subject subjectdata[100];
             studentdata[stuindex].setAlldata("S243560", "CHAN Tai Man", "Information Engineering");
@@ -216,29 +216,29 @@ int main(void){
             boo = true;
             break;
         case 2:
-            std::cout << response << std::endl;
+            cout << response << endl;
             showInfoHeader();
             for(int i = 0; i < stuindex; i++){
                 studentdata[i].showInfo();
             }
             break;
         case 3:
-            std::cout << response << std::endl;
+            cout << response << endl;
             break;
         case 4:
-            std::cout << response << std::endl;
+            cout << response << endl;
             break;
         case 5:
-            std::cout << response << std::endl;
+            cout << response << endl;
             break;
         case 6:
-            std::cout << "Quit?";
+            cout << "Quit?";
             break;
         case 7: //debug
-            std::cout << "debug" << endl;
+            cout << "debug" << endl;
             break;
         default:
-            std::cout << "Unexpected Input.";
+            cout << "Unexpected Input.";
             break;
         }
         system("pause");
