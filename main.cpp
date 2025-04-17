@@ -18,6 +18,7 @@ int printMenu(int &x, bool &enabled){
     std::cout << "[6] Credits and Exit\n";
     std::cout << "*************\n";
     std::cout << "Option (1 - 6): ";
+    cin.clear();
     std::cin >> x; //get user input
     if (!(enabled) && ((x >= 2) || (x <= 5)) && (x != 1)){ 
         // show error only when data is not loaded and user using function 2~5. R1.2
@@ -34,7 +35,12 @@ int printMenu(int &x, bool &enabled){
 class Student{
     public:
     // set
-    /*
+    void setAlldata(char input1[], char input2[], char input3[]){
+        setIDM(input1);
+        setName(input2);
+        setMajor(input3);
+        setYearM();
+    }
     void setID(){
         // need better solution to turn int into char
         id[0] = 'S';
@@ -53,20 +59,21 @@ class Student{
         }
         cout << id << endl;   
     }
-    void setYear(int input){
-        cohortyear = input;
-        year = yearnow - input;
-    }
-    */
-   void setID(char input[]){
+    void setIDM(char input[]){
         for(int i = 0; i < 7; i++){
             id[i] = input[i];
         }
-   }
-   void setYear(){
-    cohortyear = (id[1] - 48)* 10 + (id[2] - 48);
-    year = getYear();
-    }   
+    }
+
+    void setYear(int input){
+        cohortyear = input;
+        year = (yearnow - cohortyear);
+    }
+    void setYearM(){
+        cohortyear = (id[1] - 48)* 10 + (id[2] - 48);
+        year = getYear();
+    }
+
     void setName(char input[]){
         for(int i = 0; i < 30; i++){
             name[i] = input[i];
@@ -77,12 +84,13 @@ class Student{
             major[i] = input[i];
         }
     }
-    void setDefault(){
 
-    }
     // get
     int getYear(){
         return (yearnow - (cohortyear + 2000));
+    }
+    int getCYear(){
+        return cohortyear;
     }
     string getName(){
         return name;
@@ -96,25 +104,31 @@ class Student{
 
     // misc
     void showInfo(){
-        cout << "Name: " << getName() << endl;
-        cout << "StudentID: " << getID() << endl;
-        cout << "Year: " << getYear() << endl;
-        cout << "Major: " << getMajor() << endl;
+        cout << getName() << "\t";
+        cout << getID() << "\t";
+        cout << getYear() << "\t";
+        cout << getMajor() << "\t";
+        cout << endl;
     }
     private:
         char name[30]; // need better solution to characters limit
-        char id[7]; //done
+        char id[8]; //done
         char major[30]; // need better solution to characters limit
-        int year; // done
-        int cohortyear; // done
+        int year; // done, locked and cannot be decided by user
+        int cohortyear; // done, user input
         float gpa;
         char subjectcode[8][7]; //replace 1D with vector 
         char grade[8][2]; // replace with vector 
 };
 
-class subject{
+class Subject{
     public:
     // set
+    void setAllData(int input1, char input2[], char input3[]){
+        setCredit(input1);
+        setSubjectCode(input2);
+        setSubjectName(input3);
+    }
     void setCredit(int input){
         credit = input;
     }
@@ -128,6 +142,10 @@ class subject{
             subjectname[i] = input[i];
         }
     }
+    void loadData(){
+
+    }
+
     // get
     int getCredit(){
         return credit;
@@ -139,32 +157,38 @@ class subject{
         int credit;
 };
 
-double getgrade(char input[2]){
+void showInfoHeader(){
+    cout << "Name" << setw(31-4) << "ID" << setw(8-2) << "Year" << setw(8) << "Major" << endl;
+    cout << "************************************************************************" << endl;
+}
+
+double getgradepoints(char input[2]){
     int i = 373, j = 242;
     float grade[5][3] = {
         {4.3, 4.0, 3.7},
         {3.3, 3.0, 2.7},
         {2.3, 2.0, 1.7},
-        {1.3, 1.0, 0},
-        {0, 0, 0}};
+        {1.3, 1.0, 0  },
+        {0  , 0  , 0  }};
     switch (input[1]){ // solution to shorten it
         case '+': j = 0; break;
         case '-': j = 2; break;
-        default: j = 1; break;
+        default : j = 1; break;
     } //
     switch (input[0]){ // solution to shorten it
         case 'A': i = 0; break;
         case 'B': i = 1; break;
         case 'C': i = 2; break;
         case 'D': i = 3; break;
-        default: i = 4; break;
+        default : i = 4; break;
     } //
-
     return grade[i][j];
 }
 
 int main(void){
     srand(randomseed);
+    int stuindex = 0;
+    int subindex = 0;
     int response = 999; // set variable to hold user input;
     char inputc[2];
     bool boo = true; // change to false at end
@@ -174,10 +198,29 @@ int main(void){
         {
         case 1:
             std::cout << response << std::endl;
+            Student studentdata[100];
+            Subject subjectdata[100];
+            studentdata[stuindex].setAlldata("S243560", "CHAN Tai Man", "Information Engineering");
+            stuindex = stuindex + 1;
+            studentdata[stuindex].setAlldata("S232210", "CHEUNG Jacky", "Civil Engineering");
+            stuindex = stuindex + 1;
+            studentdata[stuindex].setAlldata("S222343", "PAN Peter", "Global Business");
+            stuindex = stuindex + 1;
+            studentdata[stuindex].setAlldata("S244617", "WONG Kam", "Educational Psychology");
+            stuindex = stuindex + 1;
+
+            subjectdata[subindex].setAllData(3, "ENG2042", "Introduction to C++");
+            subindex = subindex + 1;
+
+
             boo = true;
             break;
         case 2:
             std::cout << response << std::endl;
+            showInfoHeader();
+            for(int i = 0; i < stuindex; i++){
+                studentdata[i].showInfo();
+            }
             break;
         case 3:
             std::cout << response << std::endl;
@@ -193,12 +236,6 @@ int main(void){
             break;
         case 7: //debug
             std::cout << "debug" << endl;
-            Student YipKai;
-            YipKai.setName("CHAN Tai Man");
-            YipKai.setID("S243560");
-            YipKai.setYear();
-            YipKai.setMajor("Information Engineering");
-            YipKai.showInfo();
             break;
         default:
             std::cout << "Unexpected Input.";
