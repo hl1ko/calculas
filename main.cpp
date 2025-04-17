@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+using namespace std;
 
 int printMenu(int &x, bool &enabled){
     std::cout << "All hail Ken Tsang.\n";
@@ -14,7 +15,7 @@ int printMenu(int &x, bool &enabled){
     std::cout << "Option (1 - 6): ";
 
     std::cin >> x; //get user input
-    if (!(enabled) && ((x >= 2) || (x <= 5)) && (x != 1)){ 
+    if (!(enabled) && ((x >= 2) || (x <= 5)) && (x != 1)){
         // show error only when data is not loaded and user using function 2~5. R1.2
         std::cout << "Starting data is not yet loaded. Please load starting data first!\n";
         x = 0;
@@ -23,7 +24,7 @@ int printMenu(int &x, bool &enabled){
     }
     return x; // return user input
     // we should rewrite this actually.s
-    
+
 }
 int main(void){
     int response = 999; // set variable to hold user input;
