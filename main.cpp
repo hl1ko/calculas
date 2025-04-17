@@ -199,7 +199,7 @@ int main(void){
         case 1:
             cout << response << endl;
             Student studentdata[100];
-            Subject subjectdata[100];
+            Subject subjectdata[100]; //bugs in gpp complier.
             studentdata[stuindex].setAlldata("S243560", "CHAN Tai Man", "Information Engineering");
             stuindex = stuindex + 1;
             studentdata[stuindex].setAlldata("S232210", "CHEUNG Jacky", "Civil Engineering");
@@ -242,7 +242,7 @@ int main(void){
             break;
         }
         system("pause");
-        system("cls");
+        cout << flush;
         //need better solution
     }while(response != 6);
     return 0;
