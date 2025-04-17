@@ -3,6 +3,7 @@
 #include <string>
 #include <iomanip>
 using namespace std;
+using std::string;
 
 const int randomseed = 5; // random seed for start data R1.1 student id part
 const int yearnow = 2025; // will use ctime lib to replace it. get year of system data. extra part
@@ -43,26 +44,21 @@ class Student{
     }
     void setID(){
         // need better solution to turn int into char
-        id[0] = 'S';
-        id[1] = 48 + (getCYear() % 100 /10);
-        id[2] = 48 + (getCYear() % 10);
-        id[3] = 48 + (rand() % 10);
-        id[4] = 48 + (rand() % 10);
-        id[5] = 48 + (rand() % 10);
-        id[6] = 0;
+        char temp[8];
+        temp[0] = 'S';
+        temp[1] = 48 + (getCYear() % 100 /10);
+        temp[2] = 48 + (getCYear() % 10);
+        temp[3] = 48 + (rand() % 10);
+        temp[4] = 48 + (rand() % 10);
+        temp[5] = 48 + (rand() % 10);
         for(int i = 1; i < 6; i++){
-            id[6] = id[6] + id[i] - 48;
+            temp[6] = temp[6] + temp[i] - 48;
         }
-        id[6] = 48 + (id[6] % 10);
-       for(int i = 0; i < strlen(id) - 1; i++){
-            cout << "[" << i << "] " << id[i] << endl;
-        }
-        cout << id << endl;
+        temp[6] = 48 + (temp[6] % 10);
+        id = temp;
     }
-    void setIDM(char input[]){
-        for(int i = 0; i < 7; i++){
-            id[i] = input[i];
-        }
+    void setIDM(string input){
+        id = input;
     }
 
     void setYear(int input){
@@ -74,15 +70,11 @@ class Student{
         year = getYear();
     }
 
-    void setName(char input[]){
-        for(int i = 0; i < 30; i++){
-            name[i] = input[i];
-        } // use for loop to ensure that only 30 char will be entered into name
+    void setName(string input){
+        name = input;
     }
-    void setMajor(char input[]){
-        for(int i = 0; i < 30; i++){
-            major[i] = input[i];
-        }
+    void setMajor(string input){
+        major = input;
     }
 
     // get
@@ -111,20 +103,20 @@ class Student{
         cout << endl;
     }
     private:
-        char name[30]; // need better solution to characters limit
-        char id[8]; //done
-        char major[30]; // need better solution to characters limit
+        string name; // need better solution to characters limit
+        string id; //done
+        string major; // need better solution to characters limit
         int year; // done, locked and cannot be decided by user
         int cohortyear; // done, user input
         float gpa;
-        char subjectcode[8][7]; //replace 1D with vector
-        char grade[8][2]; // replace with vector
+        string subjectcode[8]; //replace 1D with vector
+        string grade[8]; // replace with vector
 };
 
 class Subject{
     public:
     // set
-    void setAllData(int input1, char input2[], char input3[]){
+    void setAllData(int input1, string input2, string input3){
         setCredit(input1);
         setSubjectCode(input2);
         setSubjectName(input3);
@@ -132,15 +124,11 @@ class Subject{
     void setCredit(int input){
         credit = input;
     }
-    void setSubjectCode(char input[]){
-        for(int i = 0; i < 7; i++){
-            subjectcode[i] = input[i];
-        }
+    void setSubjectCode(string input){
+        subjectcode = input;
     }
-    void setSubjectName(char input[]){
-        for(int i = 0; i < 40; i++){
-            subjectname[i] = input[i];
-        }
+    void setSubjectName(string input){
+        subjectname = input;
     }
     void loadData(){
 
@@ -152,9 +140,9 @@ class Subject{
     }
 
     private:
-        char subjectcode[7];
-        char subjectname[40];
-        int credit;
+    string subjectcode;
+    string subjectname;
+    int credit;
 };
 
 void showInfoHeader(){
@@ -162,7 +150,7 @@ void showInfoHeader(){
     cout << "************************************************************************" << endl;
 }
 
-double getgradepoints(char input[2]){
+double getgradepoints(string input){
     int i = 373, j = 242;
     float grade[5][3] = {
         {4.3, 4.0, 3.7},
@@ -189,14 +177,26 @@ int main(void){
     srand(randomseed);
     int stuindex = 0;
     int subindex = 0;
+    Student testsubject;
     int response = 999; // set variable to hold user input;
-    char inputc[2];
+    string inputc;
     bool boo = true; // change to false at end
     do{
         printMenu(response, boo);
-        switch (response)
-        {
+        switch(response){
         case 1:
+            testsubject.setMajor("something");
+            cout << testsubject.getMajor() << endl;
+            testsubject.setName("goodname");
+            cout << testsubject.getName() << endl;
+            testsubject.setYear(2024);
+            testsubject.setID();
+            cout << testsubject.getID() << endl;
+            testsubject.setIDM("S234551");
+            cout << testsubject.getID() << endl;
+            cin >> inputc;
+            cout << getgradepoints(inputc);
+            /*
             cout << response << endl;
             Student studentdata[100];
             Subject subjectdata[100]; //bugs in gpp complier.
@@ -208,10 +208,9 @@ int main(void){
             stuindex = stuindex + 1;
             studentdata[stuindex].setAlldata("S244617", "WONG Kam", "Educational Psychology");
             stuindex = stuindex + 1;
-
             subjectdata[subindex].setAllData(3, "ENG2042", "Introduction to C++");
             subindex = subindex + 1;
-
+            */
 
             boo = true;
             break;
@@ -219,7 +218,7 @@ int main(void){
             cout << response << endl;
             showInfoHeader();
             for(int i = 0; i < stuindex; i++){
-                studentdata[i].showInfo();
+                //studentdata[i].showInfo();
             }
             break;
         case 3:
