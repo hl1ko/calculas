@@ -84,6 +84,9 @@ class Student{
             major[i] = input[i];
         }
     }
+    void setSubject(){
+        
+    }
 
     // get
     int getYear(){
@@ -200,19 +203,7 @@ int main(void){
             std::cout << response << std::endl;
             Student studentdata[100];
             Subject subjectdata[100];
-            studentdata[stuindex].setAlldata("S243560", "CHAN Tai Man", "Information Engineering");
-            stuindex = stuindex + 1;
-            studentdata[stuindex].setAlldata("S232210", "CHEUNG Jacky", "Civil Engineering");
-            stuindex = stuindex + 1;
-            studentdata[stuindex].setAlldata("S222343", "PAN Peter", "Global Business");
-            stuindex = stuindex + 1;
-            studentdata[stuindex].setAlldata("S244617", "WONG Kam", "Educational Psychology");
-            stuindex = stuindex + 1;
-
-            subjectdata[subindex].setAllData(3, "ENG2042", "Introduction to C++");
-            subindex = subindex + 1;
-
-
+            loadDefaultData(stuindex, subindex);
             boo = true;
             break;
         case 2:
@@ -233,6 +224,7 @@ int main(void){
             break;
         case 6:
             std::cout << "Quit?";
+            return;
             break;
         case 7: //debug
             std::cout << "debug" << endl;
@@ -241,9 +233,59 @@ int main(void){
             std::cout << "Unexpected Input.";
             break;
         }
-        system("pause");
-        system("cls");
+        //system("pause");
+        //system("cls");
         //need better solution
-    }while(response != 6);
+    }while(1);
     return 0;
+}
+
+void loadDefaultData(int &stuindex, int &subindex){
+    Student studentdata[100];
+    Subject subjectdata[100];
+    studentdata[stuindex].setAlldata("S243560", "CHAN Tai Man", "Information Engineering");
+    stuindex = stuindex + 1;
+    studentdata[stuindex].setAlldata("S232210", "CHEUNG Jacky", "Civil Engineering");
+    stuindex = stuindex + 1;
+    studentdata[stuindex].setAlldata("S222343", "PAN Peter", "Global Business");
+    stuindex = stuindex + 1;
+    studentdata[stuindex].setAlldata("S244617", "WONG Kam", "Educational Psychology");
+    stuindex = stuindex + 1;
+
+    subjectdata[subindex].setAllData(3, "ENG2042", "Introduction to C++");
+    subindex = subindex + 1;
+    subjectdata[subindex].setAllData(3, "ENG2219", "Signal Processing");
+    subindex = subindex + 1;
+    subjectdata[subindex].setAllData(2, "LCH1302", "Professional English Writing");
+    subindex = subindex + 1;
+    subjectdata[subindex].setAllData(3, "ENG1113", "Structural Fundamental");
+    subindex = subindex + 1;
+    subjectdata[subindex].setAllData(3, "ENG2250", "Engineering Mathematics");
+    subindex = subindex + 1;
+    subjectdata[subindex].setAllData(2, "ENG2041", "Applied Computing");
+    subindex = subindex + 1;
+    subjectdata[subindex].setAllData(2, "LCH1109", "Japanese I");
+    subindex = subindex + 1;
+    subjectdata[subindex].setAllData(3, "BUS1021", "Personal Financial Planning");
+    subindex = subindex + 1;
+    subjectdata[subindex].setAllData(3, "ENG2042", "Introduction to C++");
+    subindex = subindex + 1;
+    subjectdata[subindex].setAllData(3, "BUS1021", "Personal Financial Planning");
+    subindex = subindex + 1;
+    subjectdata[subindex].setAllData(3, "BUS2002", "Introduction to Economics");
+    subindex = subindex + 1;
+    subjectdata[subindex].setAllData(3, "BUS3006", "Understanding Globalization");
+    subindex = subindex + 1;
+    subjectdata[subindex].setAllData(4, "BUS4510", "Business Project Management");
+    subindex = subindex + 1;
+    subjectdata[subindex].setAllData(5, "ENG4523", "Final Year Project");
+    subindex = subindex + 1;
+    subjectdata[subindex].setAllData(2, "LCH1019", "Japanese I");
+    subindex = subindex + 1;
+    subjectdata[subindex].setAllData(2, "PSY1234", "Japanese I");
+    subindex = subindex + 1;
+    subjectdata[subindex].setAllData(3, "PSY2253", "Sociology");
+    subindex = subindex + 1;
+    subjectdata[subindex].setAllData(3, "PSY2190", "Human Behavior");
+    subindex = subindex + 1;
 }
