@@ -23,8 +23,7 @@ int printMenu(int &x, bool &enabled){
     cin >> x; //get user input
     if (!(enabled) && ((x >= 2) || (x <= 5)) && (x != 1)){
         // show error only when data is not loaded and user using function 2~5. R1.2
-        cout << "Starting data is not yet loaded. Please load starting data first!\n";
-        x = 0;
+        x = 819; // main switch case 819 output "Starting data is not yet loaded. Please load starting data first!\n"
     }else if(!(enabled) && (x == 1)){
         enabled = true;
         // R1.1 insert loadrealstartingdata here -------------------------------------------------------------------------------
@@ -180,11 +179,12 @@ int main(void){
     Student testsubject;
     int response = 999; // set variable to hold user input;
     string inputc;
-    bool boo = true; // change to false at end
+    bool boo = false;
     do{
         printMenu(response, boo);
         switch(response){
         case 1:
+            cout << "debug output: " << response << endl;
             testsubject.setMajor("something");
             cout << testsubject.getMajor() << endl;
             testsubject.setName("goodname");
@@ -215,26 +215,29 @@ int main(void){
             boo = true;
             break;
         case 2:
-            cout << response << endl;
+            cout << "debug output: " << response << endl;
             showInfoHeader();
             for(int i = 0; i < stuindex; i++){
                 //studentdata[i].showInfo();
             }
             break;
         case 3:
-            cout << response << endl;
+            cout << "debug output: " << response << endl;
             break;
         case 4:
-            cout << response << endl;
+            cout << "debug output: " << response << endl;
             break;
         case 5:
-            cout << response << endl;
+            cout << "debug output: " << response << endl;
             break;
         case 6:
             cout << "Quit?";
             break;
         case 7: //debug
             cout << "debug" << endl;
+            break;
+        case 819:
+            cout << "Starting data is not yet loaded. Please load starting data first!\n";
             break;
         default:
             cout << "Unexpected Input.";
